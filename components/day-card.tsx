@@ -31,12 +31,13 @@ export function DayCard({
     let totalKRW = 0
 
     day.items.forEach((item) => {
+      const amount = (item as any)?.cost?.amount ?? (item as any)?.cost?.value ?? 0
       if (item.cost.currency === "JPY") {
-        totalJPY += item.cost.amount
-        totalKRW += item.cost.amount * exchangeRate
+        totalJPY += amount
+        totalKRW += amount * exchangeRate
       } else {
-        totalKRW += item.cost.amount
-        totalJPY += item.cost.amount / exchangeRate
+        totalKRW += amount
+        totalJPY += amount / exchangeRate
       }
     })
 
@@ -66,7 +67,7 @@ export function DayCard({
   const getCategoryPreview = () => {
     const categories = day.items.reduce(
       (acc, item) => {
-        acc[item.category] = (acc[item.category] || 0) + 1
+        acc[item.category as unknown as string] = (acc[item.category as unknown as string] || 0) + 1
         return acc
       },
       {} as Record<string, number>,
@@ -81,7 +82,7 @@ export function DayCard({
   const categoryPreview = getCategoryPreview()
 
   return (
-    <Card className="card-hover touch-target overflow-hidden">
+    <Card className="card-hover touch-target overflow-hidden cursor-pointer" onClick={onViewDetails}>
       <CardContent className="p-0">
         <div className="p-4 pb-0">
           <div className="flex items-start justify-between mb-3">
@@ -92,11 +93,11 @@ export function DayCard({
                 <span className="text-xs text-primary-foreground">{dayOfWeek}</span>
               </div>
               <div className="flex-1">
-                <h3 className="text-h3 font-semibold text-foreground mb-1">{day.city || "일정"}</h3>
-                {day.accommodation && (
+                <h3 className="text-h3 font-semibold text-foreground mb-1">{(day as any).city || day.title || "일정"}</h3>
+                {(((day as any).accommodation) || day.lodging) && (
                   <div className="flex items-center gap-1 text-caption">
                     <Bed className="h-3 w-3" />
-                    <span>{day.accommodation}</span>
+                    <span>{(day as any).accommodation || day.lodging}</span>
                   </div>
                 )}
               </div>
@@ -108,7 +109,7 @@ export function DayCard({
           {day.coverImage ? (
             <Image
               src={day.coverImage || "/placeholder.svg"}
-              alt={`${day.city} 썸네일`}
+              alt={`${(day as any).city || day.title} 썸네일`}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -132,8 +133,8 @@ export function DayCard({
 
             <div className="flex flex-wrap gap-1">
               {categoryPreview.map((category) => (
-                <Badge key={category} variant="secondary" className={`text-xs ${CATEGORY_COLORS[category]}`}>
-                  {CATEGORY_ICONS[category]} {category}
+                <Badge key={category} variant="secondary" className={`text-xs ${CATEGORY_COLORS[category as keyof typeof CATEGORY_COLORS]}`}>
+                  {CATEGORY_ICONS[category as keyof typeof CATEGORY_ICONS]} {category}
                 </Badge>
               ))}
               {day.items.length > 4 && (
@@ -197,11 +198,27 @@ export function DayCard({
             </div>
 
             <div className="flex gap-2 pt-2">
-              <Button variant="default" size="sm" onClick={onViewDetails} className="flex-1 touch-target">
+              <Button
+                variant="default"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onViewDetails()
+                }}
+                className="flex-1 touch-target"
+              >
                 <Eye className="h-4 w-4 mr-2" />
                 상세 보기
               </Button>
-              <Button variant="outline" size="sm" onClick={onExportPNG} className="touch-target bg-transparent">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onExportPNG()
+                }}
+                className="touch-target bg-transparent"
+              >
                 <Download className="h-4 w-4" />
               </Button>
             </div>
