@@ -8,6 +8,7 @@ import { Footer } from "./footer"
 import { BudgetModal } from "./budget-modal"
 import { AddItineraryModal } from "./add-itinerary-modal"
 import { ItineraryEditScreen } from "./itinerary-edit-screen"
+import { ItineraryBottomSheet } from "./itinerary-bottom-sheet"
 import { DayCard } from "./day-card"
 import { ImageUpload } from "./image-upload"
 import { Button } from "@/components/ui/button"
@@ -794,6 +795,17 @@ export function TripPlanner() {
 
       <Footer onExportPNG={handleExportPNG} />
 
+      <ItineraryBottomSheet
+        isOpen={isBottomSheetOpen}
+        onClose={() => setIsBottomSheetOpen(false)}
+        item={selectedItem}
+        day={selectedDay}
+        exchangeRate={tripData.exchangeRate}
+        onEdit={(item) => handleUpdateItem(item)}
+        onDelete={(itemId, dayId) => handleDeleteItem(itemId, dayId)}
+        onUpdate={(item) => handleUpdateItem(item)}
+      />
+
       <Dialog open={isThumbnailModalOpen} onOpenChange={setIsThumbnailModalOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -802,8 +814,8 @@ export function TripPlanner() {
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">{thumbnailEditDay?.city} 일정의 대표 이미지를 설정하세요.</p>
             <ImageUpload
-              currentImage={thumbnailEditDay?.coverImage}
-              onImageChange={handleSaveThumbnail}
+              value={thumbnailEditDay?.coverImage}
+              onChange={handleSaveThumbnail}
               aspectRatio="16:9"
             />
           </div>
