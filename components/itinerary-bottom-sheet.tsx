@@ -68,6 +68,7 @@ export function ItineraryBottomSheet({
   onDelete,
   onUpdate,
 }: ItineraryBottomSheetProps) {
+  console.log("ItineraryBottomSheet render - isOpen:", isOpen, "item:", item, "day:", day)
   const [activeTab, setActiveTab] = useState("overview")
   const [checklist, setChecklist] = useState<ChecklistItem[]>([
     { id: "1", text: "입장권 예약 확인", completed: false },

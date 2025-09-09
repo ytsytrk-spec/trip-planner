@@ -419,9 +419,11 @@ export function TripPlanner() {
   }
 
   const handleDayClick = (day: DayItinerary) => {
+    console.log("handleDayClick called with day:", day)
     setSelectedDay(day)
     setSelectedItem(null)
     setIsBottomSheetOpen(true)
+    console.log("Bottom sheet should be open now")
   }
 
   const handleEditDay = (day: DayItinerary) => {

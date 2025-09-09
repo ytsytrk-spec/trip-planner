@@ -82,7 +82,10 @@ export function DayCard({
   const categoryPreview = getCategoryPreview()
 
   return (
-    <Card className="card-hover touch-target overflow-hidden cursor-pointer" onClick={onViewDetails}>
+    <Card className="card-hover touch-target overflow-hidden cursor-pointer" onClick={() => {
+      console.log("DayCard clicked, calling onViewDetails")
+      onViewDetails()
+    }}>
       <CardContent className="p-0">
         <div className="p-4 pb-0">
           <div className="flex items-start justify-between mb-3">
@@ -203,6 +206,7 @@ export function DayCard({
                 size="sm"
                 onClick={(e) => {
                   e.stopPropagation()
+                  console.log("상세 보기 버튼 클릭됨")
                   onViewDetails()
                 }}
                 className="flex-1 touch-target"
