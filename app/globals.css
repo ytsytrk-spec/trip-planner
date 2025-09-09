@@ -1,0 +1,216 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color tokens based on specification */
+  --brand: #1868ff;
+  --text: #0b1220;
+  --subtext: #5b6b82;
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --stroke: #e6ecf5;
+  --positive: #0cb678;
+  --warning: #ffb020;
+  --danger: #f04438;
+
+  /* Existing shadcn tokens mapped to new system */
+  --background: #f7f9fc;
+  --foreground: #0b1220;
+  --card: #ffffff;
+  --card-foreground: #0b1220;
+  --popover: #ffffff;
+  --popover-foreground: #0b1220;
+  --primary: #1868ff;
+  --primary-foreground: #ffffff;
+  --secondary: #e6ecf5;
+  --secondary-foreground: #0b1220;
+  --muted: #f7f9fc;
+  --muted-foreground: #5b6b82;
+  --accent: #1868ff;
+  --accent-foreground: #ffffff;
+  --destructive: #f04438;
+  --destructive-foreground: #ffffff;
+  --border: #e6ecf5;
+  --input: #ffffff;
+  --ring: #1868ff;
+  --chart-1: #1868ff;
+  --chart-2: #0cb678;
+  --chart-3: #ffb020;
+  --chart-4: #f04438;
+  --chart-5: #5b6b82;
+  --radius: 0.75rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0b1220;
+  --sidebar-primary: #1868ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1868ff;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e6ecf5;
+  --sidebar-ring: #1868ff;
+}
+
+.dark {
+  /* Updated dark mode colors based on specification */
+  --brand: #4c8dff;
+  --text: #e6eaf2;
+  --subtext: #9fb0c9;
+  --bg: #0e1220;
+  --card: #151a2b;
+  --stroke: #22283a;
+  --positive: #0cb678;
+  --warning: #ffb020;
+  --danger: #f04438;
+
+  /* Existing shadcn tokens mapped to new dark system */
+  --background: #0e1220;
+  --foreground: #e6eaf2;
+  --card: #151a2b;
+  --card-foreground: #e6eaf2;
+  --popover: #151a2b;
+  --popover-foreground: #e6eaf2;
+  --primary: #4c8dff;
+  --primary-foreground: #0e1220;
+  --secondary: #22283a;
+  --secondary-foreground: #e6eaf2;
+  --muted: #22283a;
+  --muted-foreground: #9fb0c9;
+  --accent: #4c8dff;
+  --accent-foreground: #0e1220;
+  --destructive: #f04438;
+  --destructive-foreground: #e6eaf2;
+  --border: #22283a;
+  --input: #22283a;
+  --ring: #4c8dff;
+  --chart-1: #4c8dff;
+  --chart-2: #0cb678;
+  --chart-3: #ffb020;
+  --chart-4: #f04438;
+  --chart-5: #9fb0c9;
+  --sidebar: #151a2b;
+  --sidebar-foreground: #e6eaf2;
+  --sidebar-primary: #4c8dff;
+  --sidebar-primary-foreground: #0e1220;
+  --sidebar-accent: #4c8dff;
+  --sidebar-accent-foreground: #0e1220;
+  --sidebar-border: #22283a;
+  --sidebar-ring: #4c8dff;
+}
+
+@theme inline {
+  /* Updated font configuration for Noto Sans KR with proper fallbacks */
+  --font-sans: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+
+  /* Added custom color tokens */
+  --color-brand: var(--brand);
+  --color-text: var(--text);
+  --color-subtext: var(--subtext);
+  --color-bg: var(--bg);
+  --color-stroke: var(--stroke);
+  --color-positive: var(--positive);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* Existing shadcn color mappings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Updated radius tokens based on specification */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.75rem;
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    /* Added Korean typography optimizations */
+    line-height: 1.6;
+    word-break: keep-all;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Added typography scale based on specification */
+  .text-h1 {
+    @apply text-2xl leading-8 font-bold;
+  }
+
+  .text-h2 {
+    @apply text-xl leading-7 font-semibold;
+  }
+
+  .text-h3 {
+    @apply text-lg leading-relaxed font-medium;
+  }
+
+  .text-body {
+    @apply text-base leading-6;
+  }
+
+  .text-caption {
+    @apply text-sm leading-5 text-muted-foreground;
+  }
+
+  /* Added category color utilities */
+  .category-transport {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300;
+  }
+
+  .category-food {
+    @apply bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-300;
+  }
+
+  .category-sightseeing {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300;
+  }
+
+  .category-rest {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-300;
+  }
+
+  /* Added touch-friendly utilities */
+  .touch-target {
+    @apply min-h-11 min-w-11;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 active:scale-98;
+  }
+}
