@@ -816,6 +816,7 @@ export function TripPlanner() {
             <ImageUpload
               value={thumbnailEditDay?.coverImage}
               onChange={handleSaveThumbnail}
+              onRemove={() => handleSaveThumbnail("")}
               aspectRatio="16:9"
             />
           </div>

@@ -135,7 +135,7 @@ export function ItineraryBottomSheet({
       return `https://www.google.com/maps/embed/v1/search?key=YOUR_API_KEY&q=${encodeURIComponent(item.links.mapUrl)}`
     }
     // 기본적으로 아이템 이름으로 검색
-    return `https://www.google.com/maps/embed/v1/search?key=YOUR_API_KEY&q=${encodeURIComponent(item.title)}`
+    return `https://www.google.com/maps/embed/v1/search?key=YOUR_API_KEY&q=${encodeURIComponent(item.name || item.title)}`
   }
 
   const handleAddImage = (url: string) => {
@@ -183,7 +183,7 @@ export function ItineraryBottomSheet({
             <div className="flex-1">
               <SheetTitle className="flex items-center space-x-2 text-left mb-2">
                 <Clock className="h-5 w-5" />
-                <span className="text-balance">{item.title}</span>
+                <span className="text-balance">{item.name || item.title}</span>
               </SheetTitle>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-2">
                 <Badge variant="outline" className="text-xs">
@@ -334,8 +334,8 @@ export function ItineraryBottomSheet({
                     <span className="font-medium text-body">
                       {CURRENCY_SYMBOLS.KRW}
                       {(item.cost.currency === "KRW"
-                        ? item.cost.value
-                        : convertCurrency(item.cost.value, "JPY", "KRW")
+                        ? (item.cost.amount || item.cost.value)
+                        : convertCurrency(item.cost.amount || item.cost.value, "JPY", "KRW")
                       ).toLocaleString("ko-KR")}
                     </span>
                   </div>
@@ -344,8 +344,8 @@ export function ItineraryBottomSheet({
                     <span className="font-medium text-body">
                       {CURRENCY_SYMBOLS.JPY}
                       {(item.cost.currency === "JPY"
-                        ? item.cost.value
-                        : convertCurrency(item.cost.value, "KRW", "JPY")
+                        ? (item.cost.amount || item.cost.value)
+                        : convertCurrency(item.cost.amount || item.cost.value, "KRW", "JPY")
                       ).toLocaleString("ko-KR")}
                     </span>
                   </div>
@@ -426,7 +426,7 @@ export function ItineraryBottomSheet({
                           <div key={index} className="relative aspect-[3/2] overflow-hidden rounded-lg">
                             <Image
                               src={imageUrl || "/placeholder.svg"}
-                              alt={`${item.title} 이미지 ${index + 1}`}
+                              alt={`${item.name || item.title} 이미지 ${index + 1}`}
                               fill
                               className="object-cover"
                               sizes="(max-width: 768px) 50vw, 25vw"
@@ -442,7 +442,11 @@ export function ItineraryBottomSheet({
                           </div>
                         ))}
                       </div>
-                      <ImageUpload onChange={handleAddImage} placeholder="추가 이미지 업로드" aspectRatio="3:2" />
+                      <ImageUpload 
+                        onChange={handleAddImage} 
+                        placeholder="추가 이미지 업로드" 
+                        aspectRatio="3:2" 
+                      />
                     </div>
                   ) : (
                     <ImageUpload
